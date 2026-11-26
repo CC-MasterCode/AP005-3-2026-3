@@ -1,0 +1,466 @@
+<!-- Le indica al navegador que este documento está escrito en HTML5 moderno -->
+<!DOCTYPE html>
+<!-- Abre la página web y define que el idioma principal del contenido es español -->
+<html lang="es">
+<!-- Abre la cabecera donde van los ajustes internos y estilos que no se ven directamente como texto -->
+<head>
+<!-- Configura la codificación UTF-8 para que las tildes y la letra ñ se muestren correctamente -->
+<meta charset="UTF-8">
+<!-- Adapta el ancho de la página a la pantalla del celular o computador y respeta los bordes seguros -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Define el nombre que aparece en la pestaña del navegador -->
+<title>proyectos progra aplicada</title>
+<!-- Abre el bloque de estilos CSS para darle diseño visual a toda la página -->
+<style>
+  /* Selecciona la raíz del documento para definir reglas base y variables de color */
+  :root {
+    /* Hace que el relleno interno y los bordes no agranden el tamaño total de las cajas */
+    box-sizing: border-box;
+    /* Deja un margen arriba si el teléfono tiene cámara o muesca en la pantalla */
+    padding-top: env(safe-area-inset-top, 0px);
+    /* Deja un margen abajo para no chocar con la barra de gestos de los celulares modernos */
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    /* Guarda el color gris claro de fondo para el modo claro */
+    --bg: #f4f7f6;
+    /* Guarda el color blanco para el fondo de las tarjetas */
+    --surface: #ffffff;
+    /* Guarda el color oscuro casi negro para los textos principales */
+    --text: #1d2b2a;
+    /* Guarda un tono gris verdoso suave para los párrafos secundarios */
+    --muted: #4c5f5d;
+    /* Guarda el color verde aguamarina oscuro para títulos, botones y enlaces destacados */
+    --accent: #0a7c6a;
+    /* Guarda un tono más oscuro del color principal para cuando se pasa el cursor sobre el botón */
+    --accent-hover: #086354;
+    /* Guarda un gris muy suave para las líneas de borde de las tarjetas */
+    --border: #d3dfdc;
+  /* Cierra el bloque principal de variables */
+  }
+  /* Detecta automáticamente si el sistema operativo del usuario tiene activado el modo oscuro */
+  @media (prefers-color-scheme: dark) {
+    /* Aplica los colores oscuros siempre que no se haya forzado el modo claro */
+    :root:not([data-theme="light"]) {
+      /* Avisa al navegador que use controles nativos en versión oscura */
+      color-scheme: dark;
+      /* Cambia el fondo general a un tono verde muy oscuro */
+      --bg: #0f1716;
+      /* Cambia el fondo de las tarjetas a un tono un poco más claro que el fondo general */
+      --surface: #172221;
+      /* Cambia el texto principal a un blanco suave para facilitar la lectura */
+      --text: #e6f0ee;
+      /* Cambia los textos secundarios a un gris claro */
+      --muted: #a3b8b4;
+      /* Cambia el color de acento a un verde menta brillante que resalta en fondo oscuro */
+      --accent: #3fd0b8;
+      /* Cambia el tono de acento al pasar el cursor en modo oscuro */
+      --accent-hover: #2eb8a1;
+      /* Cambia el color de los bordes a un tono oscuro sutil */
+      --border: #2a3b39;
+    /* Cierra la regla de variables del modo oscuro automático */
+    }
+  /* Cierra la consulta de preferencia de color del sistema */
+  }
+  /* Permite activar el modo oscuro manualmente si la etiqueta html tiene el atributo data-theme="dark" */
+  :root[data-theme="dark"] {
+    /* Indica al navegador que dibuje sus elementos internos en tema oscuro */
+    color-scheme: dark;
+    /* Define el color de fondo oscuro */
+    --bg: #0f1716;
+    /* Define el color oscuro de las tarjetas */
+    --surface: #172221;
+    /* Define el color claro para las letras principales */
+    --text: #e6f0ee;
+    /* Define el color gris claro para textos de apoyo */
+    --muted: #a3b8b4;
+    /* Define el verde brillante para títulos y enlaces */
+    --accent: #3fd0b8;
+    /* Define el tono del botón al pasar el cursor */
+    --accent-hover: #2eb8a1;
+    /* Define el color oscuro de los bordes */
+    --border: #2a3b39;
+  /* Cierra el bloque del tema oscuro manual */
+  }
+  /* Evita que al desplazarse hacia un elemento el contenido quede tapado por el borde superior del celular */
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  /* Define los estilos generales del cuerpo visible de la página */
+  body {
+    /* Quita el margen exterior que los navegadores ponen por defecto */
+    margin: 0;
+    /* Pinta el fondo usando la variable de color definida arriba */
+    background: var(--bg);
+    /* Pinta el color general de la letra usando la variable de texto */
+    color: var(--text);
+    /* Usa una tipografía limpia y moderna propia del sistema operativo donde se abra */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    /* Aumenta el espacio entre líneas de texto para que sea cómodo de leer */
+    line-height: 1.7;
+  /* Cierra los estilos del body */
+  }
+  /* Centra el contenedor principal en la pantalla con un ancho máximo de 760 píxeles y relleno alrededor */
+  main { max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+  /* Da estilo al título principal: tamaño grande, interlineado compacto, color de acento y sin margen superior */
+  h1 { font-size: 1.9rem; line-height: 1.25; color: var(--accent); margin-top: 0; }
+  /* Da estilo a los subtítulos: tamaño mediano, separación superior y color de acento */
+  h2 { font-size: 1.5rem; margin-top: 2.5rem; color: var(--accent); }
+  /* Pinta todos los párrafos con el tono secundario suave */
+  p { color: var(--muted); }
+  /* Da apariencia de tarjeta con bordes redondeados a las secciones y a los bloques con clase card */
+  section, .card {
+    /* Pinta el interior de la tarjeta usando el color surface */
+    background: var(--surface);
+    /* Dibuja una línea fina de borde alrededor de la tarjeta */
+    border: 1px solid var(--border);
+    /* Redondea las esquinas de la tarjeta */
+    border-radius: 12px;
+    /* Agrega espacio interno para que el contenido no quede pegado a los bordes */
+    padding: 1.25rem 1.5rem;
+    /* Separa la tarjeta del elemento que tiene encima */
+    margin-top: 1rem;
+  /* Cierra los estilos de las tarjetas */
+  }
+  /* Da estilo a la imagen panorámica ubicada en la parte superior de la primera sección */
+  .banner-img {
+    /* Hace que la imagen ocupe todo el ancho interno de la tarjeta */
+    width: 100%;
+    /* Limita la altura máxima para mantener una proporción estética */
+    max-height: 270px;
+    /* Ajusta el encuadre de la foto sin deformarla */
+    object-fit: cover;
+    /* Redondea las esquinas de la imagen para que combine con la tarjeta */
+    border-radius: 8px;
+    /* Añade un borde sutil alrededor de la foto */
+    border: 1px solid var(--border);
+    /* Elimina el pequeño espacio inferior que traen las imágenes en línea */
+    display: block;
+    /* Deja una separación antes de que empiece el párrafo */
+    margin-bottom: 1.25rem;
+  /* Cierra los estilos de la imagen panorámica */
+  }
+  /* Organiza la tarjeta de proyectos en filas flexibles para ubicar la lista a la izquierda y la imagen a la derecha */
+  .card-proyectos {
+    /* Activa el modo flexible para colocar elementos uno al lado del otro */
+    display: flex;
+    /* Alinea verticalmente al centro la lista de enlaces y la imagen */
+    align-items: center;
+    /* Reparte el espacio libre entre la lista y la imagen */
+    justify-content: space-between;
+    /* Deja un espacio de separación entre ambos elementos */
+    gap: 1.5rem;
+    /* Permite que la imagen baje debajo de la lista si la pantalla es muy estrecha */
+    flex-wrap: wrap;
+  /* Cierra los estilos del contenedor flexible */
+  }
+  /* Da estilo a la segunda imagen que acompaña la lista de proyectos */
+  .proyecto-img {
+    /* Limita su ancho máximo para conservar buena nitidez sin pixelarse */
+    max-width: 230px;
+    /* Hace que se adapte si la pantalla del teléfono es más pequeña que ese ancho */
+    width: 100%;
+    /* Conserva su altura proporcional automáticamente */
+    height: auto;
+    /* Redondea sus esquinas a juego con el diseño general */
+    border-radius: 10px;
+    /* Dibuja un borde fino alrededor de la imagen */
+    border: 1px solid var(--border);
+  /* Cierra los estilos de la imagen de proyectos */
+  }
+  /* Da estilo a la lista con viñetas de ejemplos: color suave y sangría izquierda */
+  ul.ejemplos { color: var(--muted); padding-left: 1.2rem; }
+  /* Separa cada elemento de la lista de ejemplos respecto al siguiente */
+  ul.ejemplos li { margin-bottom: .5rem; }
+  /* Resalta las palabras en negrita dentro de la lista usando el color de texto principal */
+  ul.ejemplos strong { color: var(--text); }
+  /* Da estilo a la lista numerada de proyectos: sangría izquierda, letra un poco más grande y sin márgenes extra */
+  ol.proyectos { padding-left: 1.5rem; font-size: 1.1rem; margin: 0; }
+  /* Añade espacio arriba y abajo de cada enlace de proyecto */
+  ol.proyectos li { padding: .35rem 0; }
+  /* Da color de acento a los enlaces de proyectos y quita el subrayado fijo */
+  ol.proyectos a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  /* Muestra el subrayado cuando el usuario pasa el cursor sobre el enlace */
+  ol.proyectos a:hover { text-decoration: underline; }
+  /* Organiza en fila el campo de texto de la IP y el botón de control del ESP32 */
+  .control-esp32 {
+    /* Activa el diseño flexible en línea */
+    display: flex;
+    /* Permite que los controles bajen de línea si la pantalla es pequeña */
+    flex-wrap: wrap;
+    /* Deja una separación uniforme entre la caja de IP y el botón */
+    gap: 0.75rem;
+    /* Alinea verticalmente el campo de texto y el botón */
+    align-items: center;
+    /* Separa la fila de controles del texto superior */
+    margin-top: 0.75rem;
+  /* Cierra los estilos de la fila de control */
+  }
+  /* Da estilo al campo donde se escribe la dirección IP del ESP32 */
+  .input-ip {
+    /* Usa el color de fondo general para diferenciar la caja dentro de la tarjeta */
+    background: var(--bg);
+    /* Usa el color de texto principal para que los números se lean bien */
+    color: var(--text);
+    /* Dibuja el borde usando el color estándar de la página */
+    border: 1px solid var(--border);
+    /* Redondea las esquinas de la caja de texto */
+    border-radius: 8px;
+    /* Da espacio interno cómodo para escribir */
+    padding: 0.65rem 0.9rem;
+    /* Define el tamaño de letra legible */
+    font-size: 1rem;
+    /* Permite que el campo crezca ocupando el espacio disponible */
+    flex: 1;
+    /* Evita que se encoja demasiado en pantallas pequeñas */
+    min-width: 190px;
+  /* Cierra los estilos del campo de IP */
+  }
+  /* Da estilo al botón que enciende y apaga el parpadeo del LED */
+  .btn-led {
+    /* Pinta el fondo del botón con el color principal de la página */
+    background: var(--accent);
+    /* Pinta el texto del botón en blanco puro para lograr buen contraste */
+    color: #ffffff;
+    /* Elimina el borde gris por defecto de los botones HTML */
+    border: none;
+    /* Redondea las esquinas del botón */
+    border-radius: 8px;
+    /* Da espacio interno para que sea fácil de presionar */
+    padding: 0.68rem 1.2rem;
+    /* Define el tamaño de letra del botón */
+    font-size: 1rem;
+    /* Pone el texto en seminegrita */
+    font-weight: 600;
+    /* Muestra la mano al pasar el cursor encima */
+    cursor: pointer;
+    /* Suaviza el cambio de color al interactuar con el botón */
+    transition: background 0.2s ease, transform 0.1s ease;
+  /* Cierra los estilos base del botón */
+  }
+  /* Cambia ligeramente el tono del botón cuando el cursor está encima */
+  .btn-led:hover { background: var(--accent-hover); }
+  /* Da sensación física de clic al presionar el botón */
+  .btn-led:active { transform: scale(0.98); }
+  /* Cambia el color del botón a rojo suave cuando el LED ya está titilando para indicar que al pulsar se detendrá */
+  .btn-led.activo { background: #c93b3b; }
+  /* Define el estilo del texto inferior que informa si el ESP32 respondió */
+  .estado-esp32 {
+    /* Deja una pequeña separación debajo del botón */
+    margin-top: 0.85rem;
+    /* Elimina el margen inferior extra */
+    margin-bottom: 0;
+    /* Ajusta el tamaño de letra ligeramente más compacto */
+    font-size: 0.95rem;
+    /* Alinea el punto indicador junto al texto */
+    display: flex;
+    /* Centra verticalmente el punto respecto al texto */
+    align-items: center;
+    /* Separa el punto del mensaje */
+    gap: 0.5rem;
+  /* Cierra los estilos del indicador de estado */
+  }
+  /* Dibuja un pequeño círculo que cambia de color según el estado del LED */
+  .punto-estado {
+    /* Define el ancho del círculo */
+    width: 10px;
+    /* Define el alto del círculo */
+    height: 10px;
+    /* Convierte el cuadrado en un círculo perfecto */
+    border-radius: 50%;
+    /* Pinta el círculo en gris cuando está inactivo */
+    background: var(--muted);
+    /* Evita que el círculo se aplaste si el texto es largo */
+    flex-shrink: 0;
+  /* Cierra los estilos del punto indicador */
+  }
+  /* Activa una animación de parpadeo visual en el círculo de la web cuando el LED físico está titilando */
+  .punto-estado.titilando {
+    /* Pinta el círculo con el color verde brillante de acento */
+    background: var(--accent);
+    /* Ejecuta la animación de parpadeo cada 0.6 segundos de forma infinita */
+    animation: parpadeo-web 0.6s infinite alternate;
+  /* Cierra los estilos del punto activo */
+  }
+  /* Define los fotogramas de la animación de parpadeo en pantalla */
+  @keyframes parpadeo-web {
+    /* Estado inicial totalmente visible */
+    from { opacity: 1; }
+    /* Estado final tenue para simular el destello del LED */
+    to { opacity: 0.2; }
+  /* Cierra la animación */
+  }
+/* Cierra el bloque de estilos CSS */
+</style>
+<!-- Cierra la cabecera del documento -->
+</head>
+<!-- Abre el cuerpo visible de la página -->
+<body>
+<!-- Abre el contenedor principal centrado -->
+<main>
+  <!-- Muestra el título principal de la página -->
+  <h1>¿Qué es la programación aplicada en electrónica?</h1>
+
+  <!-- Abre la primera tarjeta con la explicación teórica y los ejemplos -->
+  <section>
+    <!-- Inserta la imagen panorámica de tecnologías en la parte superior de la tarjeta -->
+    <img class="banner-img" src="https://www.extrasoft.es/wp-content/uploads/2022/10/5-TECNOLOGIAS-1080x675.jpg" alt="Tecnologías de programación aplicada">
+    <!-- Abre el párrafo introductorio -->
+    <p>
+      <!-- Primera línea del párrafo que define qué hace la programación aplicada en electrónica -->
+      La programación aplicada en electrónica consiste en escribir código que controla,
+      <!-- Segunda línea que explica la interacción del software con componentes físicos -->
+      lee o comunica componentes y circuitos físicos. En lugar de producir solo
+      <!-- Tercera línea que contrasta el software de pantalla con el control en el mundo real -->
+      programas para una pantalla, el código interactúa con el mundo real: enciende
+      <!-- Cuarta línea que menciona acciones concretas como medir variables o enviar datos -->
+      LEDs, mide temperatura, mueve motores o envía datos por internet. Normalmente
+      <!-- Quinta línea que nombra las placas más usadas para ejecutar este código -->
+      se ejecuta en microcontroladores como Arduino, ESP32 o Raspberry Pi Pico.
+    <!-- Cierra el párrafo introductorio -->
+    </p>
+    <!-- Párrafo breve que introduce los ejemplos prácticos -->
+    <p>Ejemplos de cómo se usa:</p>
+    <!-- Abre la lista con viñetas de ejemplos de aplicación -->
+    <ul class="ejemplos">
+      <!-- Primer ejemplo: lectura de sensores ambientales con un ESP32 -->
+      <li><strong>Lectura de sensores:</strong> programar un ESP32 para leer la temperatura y la humedad de un sensor DHT22 y mostrarlas en una pantalla.</li>
+      <!-- Segundo ejemplo: activación de cargas físicas como relés o motores -->
+      <li><strong>Control de actuadores:</strong> activar un relé o un motor cuando un sensor detecta movimiento o poca luz.</li>
+      <!-- Tercer ejemplo: conexión a internet para monitoreo remoto -->
+      <li><strong>Internet de las cosas (IoT):</strong> enviar los datos medidos por WiFi a una plataforma en la nube para verlos desde el celular.</li>
+      <!-- Cuarto ejemplo: automatización de un sistema de riego -->
+      <li><strong>Automatización:</strong> un sistema de riego que se activa solo cuando la humedad del suelo baja de cierto valor.</li>
+      <!-- Quinto ejemplo: análisis de datos recolectados usando Python -->
+      <li><strong>Análisis de datos:</strong> guardar las mediciones de los sensores y analizarlas con Python para encontrar patrones o predecir fallas.</li>
+    <!-- Cierra la lista de ejemplos -->
+    </ul>
+  <!-- Cierra la primera tarjeta -->
+  </section>
+
+  <!-- Muestra el subtítulo de la sección de proyectos -->
+  <h2>Mis proyectos</h2>
+
+  <!-- Abre la tarjeta de proyectos con distribución flexible para acomodar la lista y la segunda imagen -->
+  <div class="card card-proyectos">
+    <!-- Abre la lista numerada con los enlaces de los proyectos -->
+    <ol class="proyectos">
+      <!-- Primer enlace: repositorio actualizado de GitHub que se abre en una pestaña nueva -->
+      <li><a href="https://github.com/CC-MasterCode/AP005-3-2026-3.git" target="_blank" rel="noopener">GitHub</a></li>
+      <!-- Segundo enlace: simulación en Wokwi del perceptrón AND -->
+      <li><a href="https://wokwi.com/projects/480367930768712705" target="_blank" rel="noopener">perceptron and</a></li>
+      <!-- Tercer enlace: simulación actualizada en Wokwi del perceptrón OR -->
+      <li><a href="https://wokwi.com/projects/481539565284151297" target="_blank" rel="noopener">perceptron OR</a></li>
+      <!-- Cuarto enlace: simulación actualizada en Wokwi del perceptrón de 3 entradas -->
+      <li><a href="https://wokwi.com/projects/481687924434116609" target="_blank" rel="noopener">Perceptron 3 entradas</a></li>
+    <!-- Cierra la lista numerada de proyectos -->
+    </ol>
+    <!-- Inserta la segunda imagen al lado derecho de la lista para equilibrar el espacio de la tarjeta -->
+    <img class="proyecto-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOMNSFsSFMRPKl0R6NzHjcjdg-V6vge2bPBNbYc78D7g&s=10" alt="Ilustración de proyectos de electrónica">
+  <!-- Cierra la tarjeta de proyectos -->
+  </div>
+
+  <!-- Muestra el subtítulo de la sección de control inalámbrico por Wi-Fi -->
+  <h2>Control inalámbrico ESP32</h2>
+
+  <!-- Abre la tarjeta interactiva que envía órdenes HTTP al ESP32 -->
+  <div class="card">
+    <!-- Explica brevemente el funcionamiento del botón con la IP del ESP32 -->
+    <p style="margin-top: 0;">Dirección IP local de tu ESP32 en la red del teléfono (pulsa el botón para encender o detener el parpadeo del LED de la placa):</p>
+    <!-- Agrupa la caja de texto de la IP y el botón de acción -->
+    <div class="control-esp32">
+      <!-- Campo de texto precargado con la IP obtenida de tu ESP32 (10.12.85.93) -->
+      <input type="text" id="esp-ip" class="input-ip" value="10.12.85.93" placeholder="Ej: 10.12.85.93" aria-label="Dirección IP del ESP32">
+      <!-- Botón que envía la orden de encender o detener el parpadeo al hacer clic -->
+      <button type="button" id="btn-led" class="btn-led">Encender LED titilando</button>
+    <!-- Cierra el contenedor de controles -->
+    </div>
+    <!-- Muestra el estado actual de la conexión y del LED -->
+    <p class="estado-esp32">
+      <!-- Círculo visual que titila cuando el LED físico está activo -->
+      <span id="punto-estado" class="punto-estado"></span>
+      <!-- Texto dinámico que informa si el comando se envió o si hubo error de conexión -->
+      <span id="estado-texto">Listo para conectar con 10.12.85.93...</span>
+    <!-- Cierra la línea de estado -->
+    </p>
+  <!-- Cierra la tarjeta de control -->
+  </div>
+<!-- Cierra el contenedor principal -->
+</main>
+
+<!-- Abre el bloque de JavaScript que le da interactividad al botón -->
+<script>
+  // Obtiene la referencia al campo de texto donde está la IP
+  const inputIp = document.getElementById('esp-ip');
+  // Obtiene la referencia al botón de encendido/apagado
+  const btnLed = document.getElementById('btn-led');
+  // Obtiene la referencia al texto de estado
+  const estadoTexto = document.getElementById('estado-texto');
+  // Obtiene la referencia al punto indicador de color
+  const puntoEstado = document.getElementById('punto-estado');
+
+  // Guarda en memoria si el parpadeo está encendido (true) o apagado (false)
+  let ledTitilando = false;
+
+  // Escucha cada vez que el usuario hace clic sobre el botón
+  btnLed.addEventListener('click', async () => {
+    // Lee la dirección IP escrita y elimina espacios accidentales al inicio o al final
+    const ip = inputIp.value.trim();
+
+    // Verifica que el usuario no haya dejado el campo de IP vacío
+    if (!ip) {
+      // Avisa en el texto de estado que falta escribir la IP
+      estadoTexto.textContent = 'Por favor escribe primero la IP de tu ESP32.';
+      // Detiene la ejecución para no enviar una petición inválida
+      return;
+    }
+
+    // Decide qué ruta pedir al ESP32: si estaba apagado pide encender (/blink/on), si estaba encendido pide apagar (/blink/off)
+    const ruta = ledTitilando ? '/blink/off' : '/blink/on';
+    // Construye la dirección web completa hacia el ESP32 en la red local
+    const url = `http://${ip}${ruta}`;
+
+    // Muestra un mensaje temporal mientras el navegador espera la respuesta de la placa
+    estadoTexto.textContent = `Enviando orden a ${ip}...`;
+
+    // Intenta enviar la petición inalámbrica al ESP32
+    try {
+      // Envía la solicitud HTTP al ESP32 y espera su respuesta
+      const respuesta = await fetch(url);
+      // Verifica si el ESP32 respondió con éxito (código HTTP 200)
+      if (!respuesta.ok) throw new Error('Respuesta no válida');
+
+      // Invierte el estado lógico del botón ahora que el ESP32 confirmó la orden
+      ledTitilando = !ledTitilando;
+
+      // Actualiza la apariencia visual según si quedó encendido o apagado
+      if (ledTitilando) {
+        // Cambia el texto del botón para permitir detener el parpadeo
+        btnLed.textContent = 'Detener LED';
+        // Pinta el botón en rojo añadiendo la clase activo
+        btnLed.classList.add('activo');
+        // Hace titilar el punto verde en pantalla
+        puntoEstado.classList.add('titilando');
+        // Confirma al usuario que el LED de la placa está titilando
+        estadoTexto.textContent = `Conectado (${ip}): LED de la placa titilando.`;
+      } else {
+        // Restaura el texto original del botón
+        btnLed.textContent = 'Encender LED titilando';
+        // Quita el color rojo del botón
+        btnLed.classList.remove('activo');
+        // Detiene la animación del punto en pantalla
+        puntoEstado.classList.remove('titilando');
+        // Confirma que el LED físico se apagó
+        estadoTexto.textContent = `Conectado (${ip}): LED apagado.`;
+      }
+    // Captura cualquier fallo si el ESP32 está apagado, en otra red Wi-Fi o la IP cambió
+    } catch (error) {
+      // Detiene la animación del punto en pantalla
+      puntoEstado.classList.remove('titilando');
+      // Muestra un mensaje claro explicando cómo revisar la conexión
+      estadoTexto.textContent = `No se pudo contactar al ESP32 en ${ip}. Revisa que tu PC siga conectado al Wi-Fi del teléfono.`;
+    }
+  // Cierra el evento de clic del botón
+  });
+// Cierra el bloque de JavaScript
+</script>
+<!-- Cierra el cuerpo visible de la página -->
+</body>
+<!-- Cierra el documento HTML -->
+</html>
